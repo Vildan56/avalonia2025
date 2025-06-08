@@ -1,9 +1,11 @@
 using System.Linq;
 using ReactiveUI;
+using ReactiveValidation;
+using ReactiveValidation.Extensions;
 
 namespace Project2025.Models
 {
-    public class RealEstate : ReactiveObject
+    public class RealEstate : ReactiveValidatableObject
     {
         private int _id;
         public int Id
@@ -12,7 +14,7 @@ namespace Project2025.Models
             set => this.RaiseAndSetIfChanged(ref _id, value);
         }
 
-        private string _type = "";
+        private string _type = string.Empty;
         public string Type
         {
             get => _type;
@@ -26,8 +28,8 @@ namespace Project2025.Models
             set => this.RaiseAndSetIfChanged(ref _address, value);
         }
 
-        private Coordinates? _coordinates;
-        public Coordinates? Coordinates
+        private Coordinates _coordinates = new();
+        public Coordinates Coordinates
         {
             get => _coordinates;
             set => this.RaiseAndSetIfChanged(ref _coordinates, value);
@@ -41,21 +43,43 @@ namespace Project2025.Models
         }
 
         public string FullAddress => Address.ToString();
-        public string CoordString => Coordinates.HasValue ?
-            $"{Coordinates.Value.Latitude:0.#####}, {Coordinates.Value.Longitude:0.#####}" : "No coordinates";
+        public string CoordString => Coordinates != null
+            ? $"{Coordinates.Latitude:0.#####}, {Coordinates.Longitude:0.#####}"
+            : "No coordinates";
+
+        public RealEstate()
+        {
+            Validator = GetValidator();
+        }
+
+        private IObjectValidator GetValidator()
+        {
+            var builder = new ValidationBuilder<RealEstate>();
+            builder.RuleFor(x => x.Type)
+                .NotEmpty().WithMessage("Тип обязателен");
+            builder.RuleFor(x => x.Address.City)
+                .NotEmpty().WithMessage("Город обязателен");
+            builder.RuleFor(x => x.Address.Street)
+                .NotEmpty().WithMessage("Улица обязательна");
+            builder.RuleFor(x => x.Coordinates.Latitude)
+                .InclusiveBetween(-90, 90).WithMessage("Широта от -90 до 90");
+            builder.RuleFor(x => x.Coordinates.Longitude)
+                .InclusiveBetween(-180, 180).WithMessage("Долгота от -180 до 180");
+            return builder.Build(this);
+        }
     }
 
     public class Address : ReactiveObject
     {
-        private string? _city;
-        public string? City
+        private string _city = string.Empty;
+        public string City
         {
             get => _city;
             set => this.RaiseAndSetIfChanged(ref _city, value);
         }
 
-        private string? _street;
-        public string? Street
+        private string _street = string.Empty;
+        public string Street
         {
             get => _street;
             set => this.RaiseAndSetIfChanged(ref _street, value);
@@ -83,13 +107,20 @@ namespace Project2025.Models
         }
     }
 
-    public struct Coordinates
+    public class Coordinates : ReactiveObject
     {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        private double _latitude;
+        public double Latitude
+        {
+            get => _latitude;
+            set => this.RaiseAndSetIfChanged(ref _latitude, value);
+        }
 
-        public bool IsValid =>
-            Latitude >= -90 && Latitude <= 90 &&
-            Longitude >= -180 && Longitude <= 180;
+        private double _longitude;
+        public double Longitude
+        {
+            get => _longitude;
+            set => this.RaiseAndSetIfChanged(ref _longitude, value);
+        }
     }
 } 

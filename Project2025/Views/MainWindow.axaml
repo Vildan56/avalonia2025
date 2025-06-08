@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Project2025.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Project2025">
 
@@ -17,21 +17,51 @@
 
     <TabControl>
         <TabItem Header="Недвижимость">
-            <StackPanel Margin="10">
+            <StackPanel Margin="10" Spacing="8">
                 <TextBlock Text="Список недвижимости" FontWeight="Bold" FontSize="16"/>
-                <!-- Здесь можно добавить DataGrid/ListBox для Properties -->
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Тип:" VerticalAlignment="Center"/>
+                    <ComboBox Width="120" ItemsSource="{Binding RealEstateVM.PropertyTypes}" SelectedItem="{Binding RealEstateVM.SelectedTypeFilter, Mode=TwoWay}"/>
+                    <TextBlock Text="Адрес:" VerticalAlignment="Center"/>
+                    <TextBox Width="180" Text="{Binding RealEstateVM.AddressFilter, Mode=TwoWay}" Watermark="Введите адрес"/>
+                    <Button Content="Фильтровать" Command="{Binding RealEstateVM.ApplyFiltersCommand}"/>
+                </StackPanel>
+                <DataGrid ItemsSource="{Binding RealEstateVM.FilteredProperties}" AutoGenerateColumns="True" Height="200" SelectedItem="{Binding RealEstateVM.SelectedProperty, Mode=TwoWay}" IsReadOnly="True" DoubleTapped="RealEstateGrid_DoubleTapped"/>
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                    <Button Content="Добавить" Command="{Binding RealEstateVM.AddPropertyCommand}" Width="90"/>
+                    <Button Content="Редактировать" Command="{Binding RealEstateVM.EditPropertyCommand}" Width="110" IsEnabled="{Binding RealEstateVM.HasSelectedProperty}"/>
+                    <Button Content="Удалить" Command="{Binding RealEstateVM.DeletePropertyCommand}" Width="90" IsEnabled="{Binding RealEstateVM.CanDeleteProperty}"/>
+                </StackPanel>
             </StackPanel>
         </TabItem>
         <TabItem Header="Клиенты">
-            <StackPanel Margin="10">
+            <StackPanel Margin="10" Spacing="8">
                 <TextBlock Text="Список клиентов" FontWeight="Bold" FontSize="16"/>
-                <!-- Здесь можно добавить DataGrid/ListBox для Clients -->
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox Width="200" Text="{Binding ClientVM.FioSearch, Mode=TwoWay}" Watermark="Поиск по ФИО"/>
+                    <Button Content="Поиск" Command="{Binding ClientVM.SearchClientsCommand}"/>
+                </StackPanel>
+                <DataGrid ItemsSource="{Binding ClientVM.FilteredClients}" AutoGenerateColumns="True" Height="200" SelectedItem="{Binding ClientVM.SelectedClient, Mode=TwoWay}" IsReadOnly="True" DoubleTapped="ClientGrid_DoubleTapped"/>
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                    <Button Content="Добавить" Command="{Binding ClientVM.AddClientCommand}" Width="90"/>
+                    <Button Content="Редактировать" Command="{Binding ClientVM.EditClientCommand}" Width="110" IsEnabled="{Binding ClientVM.HasSelectedClient}"/>
+                    <Button Content="Удалить" Command="{Binding ClientVM.DeleteClientCommand}" Width="90" IsEnabled="{Binding ClientVM.CanDeleteClient}"/>
+                </StackPanel>
             </StackPanel>
         </TabItem>
         <TabItem Header="Риэлторы">
-            <StackPanel Margin="10">
+            <StackPanel Margin="10" Spacing="8">
                 <TextBlock Text="Список риэлторов" FontWeight="Bold" FontSize="16"/>
-                <!-- Здесь можно добавить DataGrid/ListBox для Realtors -->
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox Width="200" Text="{Binding RealtorVM.FioSearch, Mode=TwoWay}" Watermark="Поиск по ФИО"/>
+                    <Button Content="Поиск" Command="{Binding RealtorVM.SearchRealtorsCommand}"/>
+                </StackPanel>
+                <DataGrid ItemsSource="{Binding RealtorVM.FilteredRealtors}" AutoGenerateColumns="True" Height="200" SelectedItem="{Binding RealtorVM.SelectedRealtor, Mode=TwoWay}" IsReadOnly="True" DoubleTapped="RealtorGrid_DoubleTapped"/>
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                    <Button Content="Добавить" Command="{Binding RealtorVM.AddRealtorCommand}" Width="90"/>
+                    <Button Content="Редактировать" Command="{Binding RealtorVM.EditRealtorCommand}" Width="110" IsEnabled="{Binding RealtorVM.HasSelectedRealtor}"/>
+                    <Button Content="Удалить" Command="{Binding RealtorVM.DeleteRealtorCommand}" Width="90" IsEnabled="{Binding RealtorVM.CanDeleteRealtor}"/>
+                </StackPanel>
             </StackPanel>
         </TabItem>
     </TabControl>

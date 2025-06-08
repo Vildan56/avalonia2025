@@ -29,5 +29,29 @@ namespace Project2025.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
+
+        private void RealEstateGrid_DoubleTapped(object? sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel vm && vm.RealEstateVM.HasSelectedProperty)
+            {
+                vm.RealEstateVM.EditPropertyCommand.Execute().Subscribe();
+            }
+        }
+
+        private void RealtorGrid_DoubleTapped(object? sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel vm && vm.RealtorVM.HasSelectedRealtor)
+            {
+                vm.RealtorVM.EditRealtorCommand.Execute().Subscribe();
+            }
+        }
+
+        private void ClientGrid_DoubleTapped(object? sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel vm && vm.ClientVM.HasSelectedClient)
+            {
+                vm.ClientVM.EditClientCommand.Execute().Subscribe();
+            }
+        }
     }
 }

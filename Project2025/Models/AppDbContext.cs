@@ -26,7 +26,7 @@ namespace Project2025
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Server=DESKTOP-V48DIEU;Database=Immovable;Trusted_Connection=True;TrustServerCertificate=True;"
+                "Server=DESKTOP-V48DIEU;Database=Immovable2;Trusted_Connection=True;TrustServerCertificate=True;"
             );
         }
 

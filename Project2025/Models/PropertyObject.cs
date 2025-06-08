@@ -21,5 +21,8 @@ namespace Project2025
         public float Area { get; set; } // FLOAT в БД
         public int PropertyTypeId { get; set; }
         public int DistrictId { get; set; }
+
+        // Навигационное свойство для EF Core
+        public PropertyType PropertyType { get; set; }
     }
 }
