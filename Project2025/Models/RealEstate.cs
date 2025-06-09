@@ -1,11 +1,9 @@
 using System.Linq;
 using ReactiveUI;
-using ReactiveValidation;
-using ReactiveValidation.Extensions;
 
 namespace Project2025.Models
 {
-    public class RealEstate : ReactiveValidatableObject
+    public class RealEstate : ReactiveObject
     {
         private int _id;
         public int Id
@@ -46,27 +44,6 @@ namespace Project2025.Models
         public string CoordString => Coordinates != null
             ? $"{Coordinates.Latitude:0.#####}, {Coordinates.Longitude:0.#####}"
             : "No coordinates";
-
-        public RealEstate()
-        {
-            Validator = GetValidator();
-        }
-
-        private IObjectValidator GetValidator()
-        {
-            var builder = new ValidationBuilder<RealEstate>();
-            builder.RuleFor(x => x.Type)
-                .NotEmpty().WithMessage("Тип обязателен");
-            builder.RuleFor(x => x.Address.City)
-                .NotEmpty().WithMessage("Город обязателен");
-            builder.RuleFor(x => x.Address.Street)
-                .NotEmpty().WithMessage("Улица обязательна");
-            builder.RuleFor(x => x.Coordinates.Latitude)
-                .InclusiveBetween(-90, 90).WithMessage("Широта от -90 до 90");
-            builder.RuleFor(x => x.Coordinates.Longitude)
-                .InclusiveBetween(-180, 180).WithMessage("Долгота от -180 до 180");
-            return builder.Build(this);
-        }
     }
 
     public class Address : ReactiveObject

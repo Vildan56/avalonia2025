@@ -25,7 +25,7 @@ namespace Project2025.Views
         private void InitializeComponent()
         {
             Width = 300;
-            Height = 270;
+            Height = 350;
             Title = "Realtor Editor";
             var panel = new StackPanel
             {
