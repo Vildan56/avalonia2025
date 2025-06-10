@@ -27,68 +27,132 @@ namespace Project2025.Views
             Width = 300;
             Height = 350;
             Title = "Realtor Editor";
-            var panel = new StackPanel
+            var mainPanel = new StackPanel
             {
+                Background = Avalonia.Media.Brushes.White,
                 Margin = new Thickness(15),
                 Spacing = 10
             };
-            panel.Children.Add(new TextBlock
+            // Заголовок с логотипом
+            mainPanel.Children.Insert(0, new Image
             {
-                Text = "Realtor Details",
-                FontSize = 16,
-                FontWeight = Avalonia.Media.FontWeight.Bold
+                Source = new Avalonia.Media.Imaging.Bitmap("avares://Project2025/Assets/logo.png"),
+                Width = 64,
+                Height = 64,
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                Margin = new Thickness(0, 10, 0, 10)
             });
-            lastNameBox = new TextBox { Watermark = "Last Name" };
+            mainPanel.Children.Insert(1, new TextBlock
+            {
+                Text = "Добавление/редактирование риэлтора",
+                FontSize = 20,
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#004AFF")),
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 20)
+            });
+            lastNameBox = new TextBox {
+                Watermark = "Last Name",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             lastNameBox.Bind(TextBox.TextProperty, new Binding("LastName") { Source = _realtor, Mode = BindingMode.TwoWay });
-            panel.Children.Add(lastNameBox);
+            mainPanel.Children.Add(lastNameBox);
             var lastNameError = new TextBlock
             {
                 Text = "Фамилия обязательна",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = string.IsNullOrWhiteSpace(_realtor.LastName)
             };
-            panel.Children.Add(lastNameError);
-            firstNameBox = new TextBox { Watermark = "First Name" };
+            mainPanel.Children.Add(lastNameError);
+            firstNameBox = new TextBox {
+                Watermark = "First Name",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             firstNameBox.Bind(TextBox.TextProperty, new Binding("FirstName") { Source = _realtor, Mode = BindingMode.TwoWay });
-            panel.Children.Add(firstNameBox);
+            mainPanel.Children.Add(firstNameBox);
             var firstNameError = new TextBlock
             {
                 Text = "Имя обязательно",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = string.IsNullOrWhiteSpace(_realtor.FirstName)
             };
-            panel.Children.Add(firstNameError);
-            middleNameBox = new TextBox { Watermark = "Middle Name" };
+            mainPanel.Children.Add(firstNameError);
+            middleNameBox = new TextBox {
+                Watermark = "Middle Name",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             middleNameBox.Bind(TextBox.TextProperty, new Binding("MiddleName") { Source = _realtor, Mode = BindingMode.TwoWay });
-            panel.Children.Add(middleNameBox);
+            mainPanel.Children.Add(middleNameBox);
             var middleNameError = new TextBlock
             {
                 Text = "Отчество обязательно",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = string.IsNullOrWhiteSpace(_realtor.MiddleName)
             };
-            panel.Children.Add(middleNameError);
-            commissionBox = new TextBox { Watermark = "Commission % (0-100)" };
+            mainPanel.Children.Add(middleNameError);
+            commissionBox = new TextBox {
+                Watermark = "Commission % (0-100)",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             commissionBox.Bind(TextBox.TextProperty, new Binding("CommissionShare")
             {
                 Source = _realtor,
                 Mode = BindingMode.TwoWay,
                 StringFormat = "{0:0}"
             });
-            panel.Children.Add(commissionBox);
+            mainPanel.Children.Add(commissionBox);
             var commissionError = new TextBlock
             {
                 Text = "Комиссия должна быть от 0 до 100",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = _realtor.CommissionShare.HasValue && (_realtor.CommissionShare < 0 || _realtor.CommissionShare > 100)
             };
-            panel.Children.Add(commissionError);
+            mainPanel.Children.Add(commissionError);
             var buttonPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Right };
-            saveButton = new Button
-            {
+            saveButton = new Button {
                 Content = "Save",
                 Width = 80,
-                IsEnabled = IsNameValid() && IsCommissionValid()
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#004AFF")),
+                Foreground = Avalonia.Media.Brushes.White,
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                CornerRadius = new CornerRadius(3),
+                BorderThickness = new Thickness(0)
             };
             saveButton.Click += (s, e) =>
             {
@@ -102,11 +166,18 @@ namespace Project2025.Views
                 }
             };
             buttonPanel.Children.Add(saveButton);
-            deleteButton = new Button
-            {
+            deleteButton = new Button {
                 Content = "Delete",
                 Width = 80,
-                IsVisible = _realtor.Id != 0
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#E3002C")),
+                Foreground = Avalonia.Media.Brushes.White,
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                CornerRadius = new CornerRadius(3),
+                BorderThickness = new Thickness(0)
             };
             deleteButton.Click += async (s, e) =>
             {
@@ -123,8 +194,8 @@ namespace Project2025.Views
                 }
             };
             buttonPanel.Children.Add(deleteButton);
-            panel.Children.Add(buttonPanel);
-            Content = panel;
+            mainPanel.Children.Add(buttonPanel);
+            Content = mainPanel;
 
             void UpdateValidation(object? sender, EventArgs? e)
             {

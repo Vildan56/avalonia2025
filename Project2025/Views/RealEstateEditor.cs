@@ -30,54 +30,100 @@ namespace Project2025.Views
             Width = 400;
             Height = 400;
             Title = "Real Estate Editor";
-            var panel = new StackPanel
+            var mainPanel = new StackPanel
             {
+                Background = Avalonia.Media.Brushes.White,
                 Margin = new Thickness(15),
                 Spacing = 10
             };
-            panel.Children.Add(new TextBlock
+            // Заголовок с логотипом
+            mainPanel.Children.Insert(0, new Image
             {
-                Text = "Property Details",
-                FontSize = 16,
-                FontWeight = Avalonia.Media.FontWeight.Bold
+                Source = new Avalonia.Media.Imaging.Bitmap("avares://Project2025/Assets/logo.png"),
+                Width = 64,
+                Height = 64,
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                Margin = new Thickness(0, 10, 0, 10)
             });
-            typeBox = new TextBox { Watermark = "Property Type" };
+            mainPanel.Children.Insert(1, new TextBlock
+            {
+                Text = "Добавление/редактирование недвижимости",
+                FontSize = 20,
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#004AFF")),
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 20)
+            });
+            typeBox = new TextBox {
+                Watermark = "Property Type",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             typeBox.Bind(TextBox.TextProperty, new Binding("Type") { Source = _property, Mode = BindingMode.TwoWay });
-            panel.Children.Add(typeBox);
+            mainPanel.Children.Add(typeBox);
             var typeError = new TextBlock
             {
                 Text = "Укажите тип недвижимости",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = string.IsNullOrWhiteSpace(_property.Type)
             };
-            panel.Children.Add(typeError);
+            mainPanel.Children.Add(typeError);
 
-            panel.Children.Add(new TextBlock
+            mainPanel.Children.Add(new TextBlock
             {
                 Text = "Address",
                 FontWeight = Avalonia.Media.FontWeight.Bold,
                 Margin = new Thickness(0, 10, 0, 5)
             });
-            cityBox = new TextBox { Watermark = "City" };
+            cityBox = new TextBox {
+                Watermark = "City",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             cityBox.Bind(TextBox.TextProperty, new Binding("Address.City") { Source = _property, Mode = BindingMode.TwoWay });
-            panel.Children.Add(cityBox);
+            mainPanel.Children.Add(cityBox);
             var cityError = new TextBlock
             {
                 Text = "Укажите город",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = string.IsNullOrWhiteSpace(_property.Address?.City)
             };
-            panel.Children.Add(cityError);
-            streetBox = new TextBox { Watermark = "Street" };
+            mainPanel.Children.Add(cityError);
+            streetBox = new TextBox {
+                Watermark = "Street",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             streetBox.Bind(TextBox.TextProperty, new Binding("Address.Street") { Source = _property, Mode = BindingMode.TwoWay });
-            panel.Children.Add(streetBox);
+            mainPanel.Children.Add(streetBox);
             var streetError = new TextBlock
             {
                 Text = "Укажите улицу",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = string.IsNullOrWhiteSpace(_property.Address?.Street)
             };
-            panel.Children.Add(streetError);
+            mainPanel.Children.Add(streetError);
             var addressPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 5 };
             var houseBox = new TextBox { Watermark = "Building", Width = 150 };
             houseBox.Bind(TextBox.TextProperty, new Binding("Address.HouseNumber") { Source = _property, Mode = BindingMode.TwoWay });
@@ -85,15 +131,26 @@ namespace Project2025.Views
             var apartmentBox = new TextBox { Watermark = "Apartment", Width = 150 };
             apartmentBox.Bind(TextBox.TextProperty, new Binding("Address.ApartmentNumber") { Source = _property, Mode = BindingMode.TwoWay });
             addressPanel.Children.Add(apartmentBox);
-            panel.Children.Add(addressPanel);
-            panel.Children.Add(new TextBlock
+            mainPanel.Children.Add(addressPanel);
+            mainPanel.Children.Add(new TextBlock
             {
                 Text = "Coordinates",
                 FontWeight = Avalonia.Media.FontWeight.Bold,
                 Margin = new Thickness(0, 10, 0, 5)
             });
             var coordPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 5 };
-            latBox = new TextBox { Watermark = "Latitude (-90..90)" };
+            latBox = new TextBox {
+                Watermark = "Latitude (-90..90)",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             latBox.Bind(TextBox.TextProperty, new Binding("Coordinates.Latitude")
             {
                 Source = _property,
@@ -101,7 +158,18 @@ namespace Project2025.Views
                 StringFormat = "{0:0.00000}"
             });
             coordPanel.Children.Add(latBox);
-            lonBox = new TextBox { Watermark = "Longitude (-180..180)" };
+            lonBox = new TextBox {
+                Watermark = "Longitude (-180..180)",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             lonBox.Bind(TextBox.TextProperty, new Binding("Coordinates.Longitude")
             {
                 Source = _property,
@@ -109,34 +177,41 @@ namespace Project2025.Views
                 StringFormat = "{0:0.00000}"
             });
             coordPanel.Children.Add(lonBox);
-            panel.Children.Add(coordPanel);
+            mainPanel.Children.Add(coordPanel);
             var latError = new TextBlock
             {
                 Text = "Широта должна быть от -90 до 90",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = _property.Coordinates == null || _property.Coordinates.Latitude < -90 || _property.Coordinates.Latitude > 90
             };
-            panel.Children.Add(latError);
+            mainPanel.Children.Add(latError);
             var lonError = new TextBlock
             {
                 Text = "Долгота должна быть от -180 до 180",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = _property.Coordinates == null || _property.Coordinates.Longitude < -180 || _property.Coordinates.Longitude > 180
             };
-            panel.Children.Add(lonError);
+            mainPanel.Children.Add(lonError);
             var warning = new TextBlock
             {
                 Text = "* Заполните обязательные поля: тип, город, улица, координаты (-90..90, -180..180)",
                 Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red),
                 IsVisible = !IsValid()
             };
-            panel.Children.Add(warning);
+            mainPanel.Children.Add(warning);
             var buttonPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Right };
-            saveButton = new Button
-            {
+            saveButton = new Button {
                 Content = "Save",
                 Width = 80,
-                IsEnabled = IsValid()
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#004AFF")),
+                Foreground = Avalonia.Media.Brushes.White,
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                CornerRadius = new CornerRadius(3),
+                BorderThickness = new Thickness(0)
             };
             saveButton.Click += (s, e) =>
             {
@@ -150,11 +225,18 @@ namespace Project2025.Views
                 }
             };
             buttonPanel.Children.Add(saveButton);
-            deleteButton = new Button
-            {
+            deleteButton = new Button {
                 Content = "Delete",
                 Width = 80,
-                IsVisible = _property.Id != 0
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#E3002C")),
+                Foreground = Avalonia.Media.Brushes.White,
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                CornerRadius = new CornerRadius(3),
+                BorderThickness = new Thickness(0)
             };
             deleteButton.Click += async (s, e) =>
             {
@@ -171,8 +253,8 @@ namespace Project2025.Views
                 }
             };
             buttonPanel.Children.Add(deleteButton);
-            panel.Children.Add(buttonPanel);
-            Content = panel;
+            mainPanel.Children.Add(buttonPanel);
+            Content = mainPanel;
 
             void UpdateValidation(object? sender, EventArgs? e)
             {

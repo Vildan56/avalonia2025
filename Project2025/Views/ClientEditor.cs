@@ -47,54 +47,129 @@ namespace Project2025.Views
             Width = 300;
             Height = 400;
             Title = "Client Editor";
-            var panel = new StackPanel
+            var mainPanel = new StackPanel
             {
+                Background = Avalonia.Media.Brushes.White,
                 Margin = new Thickness(15),
                 Spacing = 10
             };
-            panel.Children.Add(new TextBlock
+            mainPanel.Children.Insert(0, new Image
             {
-                Text = "Client Details",
-                FontSize = 16,
-                FontWeight = Avalonia.Media.FontWeight.Bold
+                Source = new Avalonia.Media.Imaging.Bitmap("avares://Project2025/Assets/logo.png"),
+                Width = 64,
+                Height = 64,
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                Margin = new Thickness(0, 10, 0, 10)
+            });
+            mainPanel.Children.Insert(1, new TextBlock
+            {
+                Text = "Добавление/редактирование клиента",
+                FontSize = 20,
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#004AFF")),
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 20)
             });
             var namePanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 5 };
-            firstNameBox = new TextBox { Watermark = "First Name" };
+            firstNameBox = new TextBox {
+                Watermark = "First Name",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             firstNameBox.Bind(TextBox.TextProperty, new Binding("FirstName") { Mode = BindingMode.TwoWay });
             namePanel.Children.Add(firstNameBox);
-            lastNameBox = new TextBox { Watermark = "Last Name" };
+            lastNameBox = new TextBox {
+                Watermark = "Last Name",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             lastNameBox.Bind(TextBox.TextProperty, new Binding("LastName") { Mode = BindingMode.TwoWay });
             namePanel.Children.Add(lastNameBox);
-            panel.Children.Add(namePanel);
+            mainPanel.Children.Add(namePanel);
             // Ошибки для имени и фамилии
             var errorPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 5 };
             firstNameError = new TextBlock { Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red) };
             errorPanel.Children.Add(firstNameError);
             lastNameError = new TextBlock { Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red) };
             errorPanel.Children.Add(lastNameError);
-            panel.Children.Add(errorPanel);
-            middleNameBox = new TextBox { Watermark = "Middle Name" };
+            mainPanel.Children.Add(errorPanel);
+            middleNameBox = new TextBox {
+                Watermark = "Middle Name",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             middleNameBox.Bind(TextBox.TextProperty, new Binding("MiddleName") { Mode = BindingMode.TwoWay });
-            panel.Children.Add(middleNameBox);
+            mainPanel.Children.Add(middleNameBox);
             middleNameError = new TextBlock { Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red) };
-            panel.Children.Add(middleNameError);
-            phoneBox = new TextBox { Watermark = "Phone" };
+            mainPanel.Children.Add(middleNameError);
+            phoneBox = new TextBox {
+                Watermark = "Phone",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             phoneBox.Bind(TextBox.TextProperty, new Binding("Phone") { Mode = BindingMode.TwoWay });
-            panel.Children.Add(phoneBox);
+            mainPanel.Children.Add(phoneBox);
             phoneError = new TextBlock { Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red) };
-            panel.Children.Add(phoneError);
-            emailBox = new TextBox { Watermark = "Email" };
+            mainPanel.Children.Add(phoneError);
+            emailBox = new TextBox {
+                Watermark = "Email",
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#FFFFFF")),
+                Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#37474F")),
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                BorderBrush = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#ECEFF1")),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(3)
+            };
             emailBox.Bind(TextBox.TextProperty, new Binding("Email") { Mode = BindingMode.TwoWay });
-            panel.Children.Add(emailBox);
+            mainPanel.Children.Add(emailBox);
             emailError = new TextBlock { Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red) };
-            panel.Children.Add(emailError);
+            mainPanel.Children.Add(emailError);
             contactError = new TextBlock { Foreground = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Red) };
-            panel.Children.Add(contactError);
+            mainPanel.Children.Add(contactError);
             var buttonPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Right };
-            saveButton = new Button
-            {
+            saveButton = new Button {
                 Content = "Save",
-                Width = 80
+                Width = 80,
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#004AFF")),
+                Foreground = Avalonia.Media.Brushes.White,
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                CornerRadius = new CornerRadius(3),
+                BorderThickness = new Thickness(0)
             };
             saveButton.Click += (s, e) =>
             {
@@ -108,11 +183,18 @@ namespace Project2025.Views
                 }
             };
             buttonPanel.Children.Add(saveButton);
-            deleteButton = new Button
-            {
+            deleteButton = new Button {
                 Content = "Delete",
                 Width = 80,
-                IsVisible = ViewModel.Id != 0
+                Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.Parse("#E3002C")),
+                Foreground = Avalonia.Media.Brushes.White,
+                FontFamily = new Avalonia.Media.FontFamily("Roboto"),
+                FontWeight = Avalonia.Media.FontWeight.Bold,
+                Height = 36,
+                Padding = new Thickness(10),
+                Margin = new Thickness(15),
+                CornerRadius = new CornerRadius(3),
+                BorderThickness = new Thickness(0)
             };
             deleteButton.Click += async (s, e) =>
             {
@@ -128,8 +210,8 @@ namespace Project2025.Views
                 }
             };
             buttonPanel.Children.Add(deleteButton);
-            panel.Children.Add(buttonPanel);
-            Content = panel;
+            mainPanel.Children.Add(buttonPanel);
+            Content = mainPanel;
             // Ручная валидация
             firstNameBox.PropertyChanged += UpdateValidation;
             lastNameBox.PropertyChanged += UpdateValidation;
