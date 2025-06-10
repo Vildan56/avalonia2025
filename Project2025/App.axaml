@@ -9,6 +9,12 @@
     <StyleInclude Source="avares://Project2025/Assets/EsoftStyles.axaml" />
   </Application.Styles>
 
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceInclude Source="avares://Project2025/Assets/EsoftColors.axaml"/>
+    </ResourceDictionary>
+  </Application.Resources>
+
   <Application.DataTemplates>
     <local:ViewLocator/>
   </Application.DataTemplates>

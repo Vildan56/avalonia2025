@@ -1,22 +1,5 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Цвета и кисти -->
-  <Color x:Key="EsoftPrimaryBlue">#004AFF</Color>
-  <Color x:Key="EsoftSuccessGreen">#00EFA5</Color>
-  <Color x:Key="EsoftDangerRed">#E3002C</Color>
-  <Color x:Key="EsoftWarningYellow">#FFE00C</Color>
-  <Color x:Key="EsoftGray">#ECEFF1</Color>
-  <Color x:Key="EsoftTextPrimary">#37474F</Color>
-  <Color x:Key="EsoftBackground">#FFFFFF</Color>
-  <SolidColorBrush x:Key="EsoftPrimaryBlueBrush" Color="{StaticResource EsoftPrimaryBlue}" />
-  <SolidColorBrush x:Key="EsoftSuccessGreenBrush" Color="{StaticResource EsoftSuccessGreen}" />
-  <SolidColorBrush x:Key="EsoftDangerRedBrush" Color="{StaticResource EsoftDangerRed}" />
-  <SolidColorBrush x:Key="EsoftWarningYellowBrush" Color="{StaticResource EsoftWarningYellow}" />
-  <SolidColorBrush x:Key="EsoftGrayBrush" Color="{StaticResource EsoftGray}" />
-  <SolidColorBrush x:Key="EsoftTextPrimaryBrush" Color="{StaticResource EsoftTextPrimary}" />
-  <SolidColorBrush x:Key="EsoftBackgroundBrush" Color="{StaticResource EsoftBackground}" />
-
-  <!-- Стили -->
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Style Selector="Button.esoft-primary">
     <Setter Property="Background" Value="{StaticResource EsoftPrimaryBlueBrush}"/>
     <Setter Property="Foreground" Value="White"/>
@@ -67,4 +50,4 @@
     <Setter Property="BorderBrush" Value="{StaticResource EsoftGrayBrush}"/>
     <Setter Property="BorderThickness" Value="1"/>
   </Style>
-</ResourceDictionary> 
+</Styles> 
